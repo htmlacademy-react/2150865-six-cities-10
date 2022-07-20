@@ -2,28 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {offers} from './mocks/offers';
-import {offerCard,offerList} from './mocks/offerList';
-// import {POINTS} from './mocks/points';
-// import {CITY} from './mocks/city';
+import {offerCard, offerCardForOtherPlaces, offerList} from './mocks/offerList';
+import {POINTS, POINTS_OTHER_OFFERS} from './mocks/points';
+import {CITY} from './mocks/city';
 
 const Setting = {
   PLACES_COUNT: 3,
 };
 
-// const root = ReactDOM.createRoot(
-//   document.getElementById('root') as HTMLElement,
-// );
-//
-// root.render(
-//   <React.StrictMode>
-//     <App points={POINTS} city={CITY} />
-//     {/*<App placesCount={Setting.PLACES_COUNT} offers={offers} offerListForPage={offerList} offerList={offerCard}/>*/}
-//   </React.StrictMode>,
-// );
 ReactDOM.render(
   <React.StrictMode>
-    {/*<App points={POINTS} city={CITY} />*/}
-    <App placesCount={Setting.PLACES_COUNT} offers={offers} offerListForPage={offerList} offerList={offerCard}/>
+    <App placesCount={Setting.PLACES_COUNT} offers={offers} offerListForPage={offerList} offerList={offerCard} otherOffer={offerCardForOtherPlaces} pointsOtherOffers={POINTS_OTHER_OFFERS} city={CITY} points={POINTS}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

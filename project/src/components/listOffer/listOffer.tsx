@@ -1,16 +1,28 @@
 import React from 'react';
 import {OfferCard} from '../../types/OfferCard';
-import Offer from '../offer/offer';
+import OfferCity from '../offer/OfferCity';
+import {TypeOfferList} from '../../const';
+import OfferComment from '../offer/offerComment';
 
 type ListOfferProps = {
+  typeList: string;
   offers: OfferCard[];
   onListItemHover: (listItemName: string) => void;
   activeOfferCard:string;
   setActiveOfferCard: React.Dispatch<React.SetStateAction<string>>;
 };
 
+const getComponentByType = (type:string, keyValueOffer: string, offer: OfferCard, activeOfferCard:string, setActiveOfferCard: React.Dispatch<React.SetStateAction<string>>) => {
+  switch (type) {
+    case TypeOfferList.CITY:
+      return <OfferCity offer={offer} keyValueOffer={keyValueOffer} activeOfferCard={activeOfferCard} setActiveOfferCard={setActiveOfferCard}/>;
+    case TypeOfferList.COMMENT:
+      return <OfferComment offer={offer} keyValueOffer={keyValueOffer} activeOfferCard={activeOfferCard} setActiveOfferCard={setActiveOfferCard}/>;
+  }
+};
+
 function ListOffer(props: ListOfferProps): JSX.Element {
-  const {offers, onListItemHover, activeOfferCard, setActiveOfferCard} = props;
+  const {typeList, offers, onListItemHover, activeOfferCard, setActiveOfferCard} = props;
 
   const listItemHoverHandler = (name:string) => {
     onListItemHover(name);
@@ -26,8 +38,9 @@ function ListOffer(props: ListOfferProps): JSX.Element {
             onMouseEnter={()=> {
               listItemHoverHandler(offer.name);
             }}
+            style={{listStyleType:'none'}}
           >
-            <Offer offer={offer} keyValueOffer={keyValueOffer} activeOfferCard={activeOfferCard} setActiveOfferCard={setActiveOfferCard} articleClassName={'cities__card'} divClassName={'place-card__info'}/>
+            {getComponentByType(typeList, keyValueOffer, offer, activeOfferCard, setActiveOfferCard)}
           </li>
         );
       })}
